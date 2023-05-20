@@ -13,7 +13,6 @@ namespace DotNet.AccelerateBall
         private Thread monitorMemoryThread = null;
         private Thread monitorNetworkThread = null;
         private AppConfig config = new AppConfig();
-        private MemoryInfo memoryInfo = new MemoryInfo();
         private Point mouseOffset;
         private ToolStripMenuItem currentOpacityItem = null;
         public MiniFormLocation miniFormLocation;

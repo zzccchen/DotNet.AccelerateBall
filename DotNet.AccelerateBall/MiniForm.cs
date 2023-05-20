@@ -1,6 +1,7 @@
 ﻿using DotNet.AccelerateBall.Util;
 using NetWorkSpeedMonitor;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -58,16 +59,7 @@ namespace DotNet.AccelerateBall
             InitializeComponent();
             StartupSetting.autoRun("DotNet.AccelerateBall.exe", Application.ExecutablePath);
             initParameter();
-            // StartMonitorNetwork(); //初始化网络流量监控
-            timer = new System.Timers.Timer(1000);
-            // 设置定时器触发事件的处理方法
-            timer.Elapsed += Timer_Elapsed;
-
-            // 设置定时器为可重复触发
-            timer.AutoReset = true;
-
-            // 启动定时器
-            timer.Start();
+            StartMonitor(); //初始化网络流量监控
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -146,74 +138,79 @@ namespace DotNet.AccelerateBall
 
         #region 内存使用率监控和网速监控
 
-        /*开始监控网络*/
+        /*开始监控*/
 
-        private void StartMonitorNetwork()
+        private void StartMonitor()
         {
-            NetworkMonitor monitor = new NetworkMonitor();
-            this.adapters = monitor.Adapters;
-            if (this.adapters != null && adapters.Length > 0)
-            {
-                foreach (NetworkAdapter adapter in adapters)
-                {
-                    monitor.StartMonitoring(adapter);
-                }
-                monitorNetworkThread = new Thread(NetworkMonitor);
-                monitorNetworkThread.IsBackground = true;
-                monitorNetworkThread.Start();
-            }
-            else
-            {
-                MessageBox.Show("无网卡");
-            }
+            timer = new System.Timers.Timer(1000);
+            // 设置定时器触发事件的处理方法
+            timer.Elapsed += background_FetchStates_DoWork;
+
+            // 设置定时器为可重复触发
+            timer.AutoReset = true;
+
+            // 启动定时器
+            timer.Start();
         }
 
-        /*网络监控*/
-
-        private void NetworkMonitor()
+        private void background_FetchStates_DoWork(object sender, ElapsedEventArgs e)
         {
-            while (this.adapters != null && adapters.Length > 0)
-            {
-                Thread.Sleep(500);
-                double downloadSpeedKbps = 0;
-                double uploadSpeedKbps = 0;
+            BackgroundWorker bgWorker = new BackgroundWorker();
+            bgWorker.WorkerReportsProgress = true;
 
-                foreach (NetworkAdapter adapter in adapters)
+            bgWorker.ReportProgress(0, "start");
+            cpu1test += 1;
+            string ip = txtIp;
+            string user = txtUser;
+            string password = txtPassword;
+
+            string formatSensor = "-I lanplus -H {0} -U {1} -P {2} sensor";
+            string parametersSensor = string.Format(formatSensor, ip, user, password);
+
+            string fullExecuteSensor = ipmitoolPath + " " + parametersSensor;
+            string result = execute(fullExecuteSensor);
+
+            result = result.Replace("\r\n", "\n");
+            string[] sensorList = result.Split('\n', '\r');
+
+            //this.CPU1.Text = "." + cpu1test;
+            int cpu_flag = 1;
+            foreach (var item in sensorList)
+            {
+                if (item.Contains("Temp") || item.Contains("CPU Usage"))
                 {
-                    downloadSpeedKbps += adapter.DownloadSpeedKbps;
-                    uploadSpeedKbps += adapter.UploadSpeedKbps;
+                    string[] temp = new string[8];
+                    var src = item.Split('|');
+                    temp[0] = src[0];
+                    temp[1] = src[1];
+                    if (cpu_flag == 1 && temp[0].StartsWith("Temp"))
+                    {
+                        this.CPU1.Text = src[1].Substring(0, 3);
+                        cpu_flag++;
+                        continue;
+                    }
+                    if (cpu_flag == 2 && temp[0].StartsWith("Temp"))
+                    {
+                        this.CPU2.Text = src[1].Substring(0, 3);
+                        continue;
+                    }
+                    if (temp[0].StartsWith("CPU Usage"))
+                    {
+                        this.CpuUsage.Text = src[1].Substring(0, 3);
+                        continue;
+                    }
+                    //lstViewSensor.Items.Add(new ListViewItem(temp));
+                    bgWorker.ReportProgress(1, temp);
                 }
-                this.CPU1.Text = getFormatNetworkSpeed(uploadSpeedKbps);
-                this.CPU2.Text = getFormatNetworkSpeed(downloadSpeedKbps);
             }
+            bgWorker.ReportProgress(100, "completed");
+            // 停止后台任务
+
+            // 释放资源
+            bgWorker.Dispose();
         }
 
-        /*获取格式化的网速*/
-
-        private string getFormatNetworkSpeed(double speedKbps)
-        {
-            string speed = "";
-            if (speedKbps >= 100)
-            {
-                speed = String.Format("{0:N0}", speedKbps);
-            }
-            else if (speedKbps >= 10)
-            {
-                speed = String.Format("{0:N1}", speedKbps);
-            }
-            else
-            {
-                if (speedKbps == 0.0 || speedKbps == 0.00)
-                {
-                    speed = String.Format("{0:N0}", speedKbps);
-                }
-                else
-                {
-                    speed = String.Format("{0:N2}", speedKbps);
-                }
-            }
-            return speed;
-        }
+        /*监控*/
 
         #endregion 内存使用率监控和网速监控
 

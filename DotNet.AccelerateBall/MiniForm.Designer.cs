@@ -52,7 +52,7 @@ namespace DotNet.AccelerateBall
             this.miniBallControl = new DotNet.AccelerateBall.MainBallControl();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.CPU2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.CpuUsage = new System.Windows.Forms.Label();
             this.mainContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -241,23 +241,23 @@ namespace DotNet.AccelerateBall
             this.CPU2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
             this.CPU2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
             // 
-            // label1
+            // CpuUsage
             // 
-            this.label1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(201)))), ((int)(((byte)(208)))));
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(14, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 32);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "00";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
-            this.label1.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
-            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
-            this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
+            this.CpuUsage.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.CpuUsage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(201)))), ((int)(((byte)(208)))));
+            this.CpuUsage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CpuUsage.ForeColor = System.Drawing.Color.White;
+            this.CpuUsage.Location = new System.Drawing.Point(14, 11);
+            this.CpuUsage.Margin = new System.Windows.Forms.Padding(0);
+            this.CpuUsage.Name = "CpuUsage";
+            this.CpuUsage.Size = new System.Drawing.Size(28, 32);
+            this.CpuUsage.TabIndex = 3;
+            this.CpuUsage.Text = "00";
+            this.CpuUsage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.CpuUsage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
+            this.CpuUsage.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
+            this.CpuUsage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
+            this.CpuUsage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
             // 
             // MiniForm
             // 
@@ -266,7 +266,7 @@ namespace DotNet.AccelerateBall
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(156, 80);
             this.ContextMenuStrip = this.mainContextMenu;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.CpuUsage);
             this.Controls.Add(this.CPU2);
             this.Controls.Add(this.CPU1);
             this.Controls.Add(this.miniBallControl);
@@ -304,7 +304,7 @@ namespace DotNet.AccelerateBall
         private System.Windows.Forms.ToolStripMenuItem showStyle1;
         private System.Windows.Forms.ToolStripMenuItem showStyle2;
         private System.Windows.Forms.Label CPU2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label CpuUsage;
     }
 }
 

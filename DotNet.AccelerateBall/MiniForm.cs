@@ -111,8 +111,8 @@ namespace DotNet.AccelerateBall
                     downloadSpeedKbps += adapter.DownloadSpeedKbps;
                     uploadSpeedKbps += adapter.UploadSpeedKbps;
                 }
-                this.uploadRate.Text = getFormatNetworkSpeed(uploadSpeedKbps);
-                this.downloadRate.Text = getFormatNetworkSpeed(downloadSpeedKbps);
+                this.CPU1.Text = getFormatNetworkSpeed(uploadSpeedKbps);
+                this.CPU2.Text = getFormatNetworkSpeed(downloadSpeedKbps);
             }
         }
 

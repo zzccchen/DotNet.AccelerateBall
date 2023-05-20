@@ -10,7 +10,6 @@ namespace DotNet.AccelerateBall
 {
     public partial class MiniForm : Form
     {
-        private BigForm bigForm = null;
         private NetworkAdapter[] adapters;
         private Thread monitorMemoryThread = null;
         private Thread monitorNetworkThread = null;
@@ -156,10 +155,6 @@ namespace DotNet.AccelerateBall
                 if (!usedMemoryRate.Equals(oldRate))
                 {
                     paintMiniBallControl(usedMemoryRate + "%");
-                    if (bigForm != null && bigForm.Visible)
-                    {
-                        bigForm.paintBigBallControl(usedMemoryRate);
-                    }
                 }
                 oldRate = usedMemoryRate;
             }
@@ -213,8 +208,6 @@ namespace DotNet.AccelerateBall
             if (showhide.Text == "隐藏")
             {
                 this.Hide();
-                if (bigForm != null && bigForm.Visible)
-                    bigForm.Hide();
                 showhide.Text = "显示";
             }
             else
@@ -229,10 +222,6 @@ namespace DotNet.AccelerateBall
             showStyle1.Image = new Bitmap(Properties.Resources.dot);
             showStyle2.Image = null;
             this.TopMost = false;
-            if (bigForm != null)
-            {
-                bigForm.TopMost = false;
-            }
         }
 
         private void showStyle2_Click(object sender, EventArgs e)
@@ -240,10 +229,6 @@ namespace DotNet.AccelerateBall
             showStyle2.Image = new Bitmap(Properties.Resources.dot);
             showStyle1.Image = null;
             this.TopMost = true;
-            if (bigForm != null)
-            {
-                bigForm.TopMost = true;
-            }
         }
 
         private void opacity100_Click(object sender, EventArgs e)
@@ -288,10 +273,6 @@ namespace DotNet.AccelerateBall
             currentOpacityItem.Image = null;
             opacityItem.Image = new Bitmap(Properties.Resources.dot);
             this.Opacity = opacity * 0.01;
-            if (bigForm != null)
-            {
-                bigForm.Opacity = opacity * 0.01;
-            }
             currentOpacityItem = opacityItem;
         }
 
@@ -350,18 +331,6 @@ namespace DotNet.AccelerateBall
             {
                 Point old = this.Location;
                 this.Location = getMiniBallMoveLocation();
-                if (old.X != this.Location.X || old.Y != this.Location.Y)
-                {
-                    if (bigForm != null && bigForm.Visible)
-                        hideDetailsForm();
-                }
-                else
-                {
-                    if (bigForm != null && !bigForm.Visible)
-                    {
-                        isMouseEnter = true;
-                    }
-                }
             }
         }
 
@@ -394,57 +363,6 @@ namespace DotNet.AccelerateBall
             return new Point(x, y);
         }
 
-        /*获取bigForm出现的位置*/
-
-        private Point getDetailsFormLocation()
-        {
-            int x = 0, y = 0;
-            Point miniBallLocation = this.Location;
-            if (this.Location.Y >= bigForm.Height) //minBall在bigBall下面
-            {
-                if (Screen.PrimaryScreen.WorkingArea.Width - this.Location.X <= bigForm.Width)
-                {
-                    x = this.Location.X + miniFormWidth - bigForm.Width;
-                    miniFormLocation = MiniFormLocation.bottomRight;
-                }
-                else
-                {
-                    x = this.Location.X;
-                    miniFormLocation = MiniFormLocation.bottomLeft;
-                }
-                y = this.Location.Y - bigForm.Height - miniBigFormSpace;
-            }
-            else if (this.Location.Y < bigForm.Height) //minBall在bigBall上面
-            {
-                if (Screen.PrimaryScreen.WorkingArea.Width - this.Location.X > bigForm.Width)
-                {
-                    x = this.Location.X;
-                    miniFormLocation = MiniFormLocation.topLeft;
-                }
-                else
-                {
-                    x = this.Location.X + miniFormWidth - bigForm.Width;
-                    miniFormLocation = MiniFormLocation.topRigh;
-                }
-                y = this.Location.Y + miniFormHeight + miniBigFormSpace;
-            }
-            return new Point(x, y);
-        }
-
         #endregion 小球和bigForm的位置方法
-
-        #region 显示和隐藏detailForm的方法和定时器
-
-        /*隐藏bigForm*/
-
-        private void hideDetailsForm()
-        {
-            if (bigForm != null && bigForm.Visible)
-            {
-                bigForm.Hide();
-            }
-        }
-
-        #endregion 显示和隐藏detailForm的方法和定时器
     }
 }

@@ -1,7 +1,9 @@
 ﻿using DotNet.AccelerateBall.Util;
 using NetWorkSpeedMonitor;
 using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -22,6 +24,20 @@ namespace DotNet.AccelerateBall
         public int miniBigFormSpace = 5;
         public int miniFormWidth = 96;
         public int miniFormHeight = 40;
+
+        private static string currentPath = Application.StartupPath; // System.Environment.CurrentDirectory;
+        private static string configFileName = "\\config.ini";
+        private static string ipmitoolPath = currentPath + "\\ipmitool.exe";
+        private static string configFilePath = currentPath + configFileName;
+
+        private static string defaultIp = "192.168.1.100";
+        private static string defaultUser = "root";
+        private static string defaultPassword = "calvin";
+        private static string defaultConfigSection = "ipmi";
+
+        private string txtIp;
+        private string txtUser;
+        private string txtPassword;
 
         /*移动时小球出现在bigForm窗体的位置方向枚举*/
 
@@ -58,6 +74,54 @@ namespace DotNet.AccelerateBall
             {
                 showStyle1.Image = new Bitmap(Properties.Resources.dot);
                 showStyle2.Image = null;
+            }
+            if (File.Exists(configFilePath))
+            {
+                string ip = IniHelper.Read(defaultConfigSection, "ip", defaultIp, configFilePath);
+                string user = IniHelper.Read(defaultConfigSection, "user", defaultUser, configFilePath);
+                string password = IniHelper.Read(defaultConfigSection, "password", defaultPassword, configFilePath);
+                txtIp = ip;
+                txtUser = user;
+                txtPassword = password;
+            }
+            else
+            {
+                IniHelper.Write(defaultConfigSection, "ip", defaultIp, configFilePath);
+                IniHelper.Write(defaultConfigSection, "user", defaultUser, configFilePath);
+                IniHelper.Write(defaultConfigSection, "password", defaultPassword, configFilePath);
+                txtIp = defaultIp;
+                txtUser = defaultUser;
+                txtPassword = defaultPassword;
+            }
+        }
+
+        private static string execute(string parameter)
+        {
+            Process process = null;
+            string result = string.Empty;
+            try
+            {
+                process = new Process();
+                process.StartInfo.FileName = "cmd.exe";
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.RedirectStandardInput = true;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardError = true;
+
+                process.Start();
+
+                process.StandardInput.WriteLine(parameter + "& exit");
+                process.StandardInput.AutoFlush = true;
+                result = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+                process.Close();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ExceptionOccurred:{ 0},{ 1}", ex.Message, ex.StackTrace.ToString());
+                return null;
             }
         }
 

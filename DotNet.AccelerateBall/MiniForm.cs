@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace DotNet.AccelerateBall
@@ -34,10 +35,12 @@ namespace DotNet.AccelerateBall
         private static string defaultUser = "root";
         private static string defaultPassword = "calvin";
         private static string defaultConfigSection = "ipmi";
+        private static int cpu1test = 1;
 
         private string txtIp;
         private string txtUser;
         private string txtPassword;
+        private static System.Timers.Timer timer;
 
         /*移动时小球出现在bigForm窗体的位置方向枚举*/
 
@@ -55,7 +58,23 @@ namespace DotNet.AccelerateBall
             InitializeComponent();
             StartupSetting.autoRun("DotNet.AccelerateBall.exe", Application.ExecutablePath);
             initParameter();
-            StartMonitorNetwork(); //初始化网络流量监控
+            // StartMonitorNetwork(); //初始化网络流量监控
+            timer = new System.Timers.Timer(1000);
+            // 设置定时器触发事件的处理方法
+            timer.Elapsed += Timer_Elapsed;
+
+            // 设置定时器为可重复触发
+            timer.AutoReset = true;
+
+            // 启动定时器
+            timer.Start();
+        }
+
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            // 这里是你要执行的循环体代码
+            cpu1test += 1;
+            this.CPU1.Text = "." + cpu1test;
         }
 
         public void initParameter()

@@ -49,8 +49,6 @@
             this.downloadRate = new System.Windows.Forms.Label();
             this.rateUnit1 = new System.Windows.Forms.Label();
             this.rateUnit2 = new System.Windows.Forms.Label();
-            this.showDetailFormTimer = new System.Windows.Forms.Timer(this.components);
-            this.hideDetailFormTimer = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.up_down_image = new System.Windows.Forms.Label();
             this.miniBallControl = new DotNet.AccelerateBall.MainBallControl();
@@ -189,7 +187,7 @@
             // 
             this.uploadRate.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.uploadRate.BackColor = System.Drawing.SystemColors.Control;
-            this.uploadRate.Font = new System.Drawing.Font("Angsana New", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(138)));
+            this.uploadRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(138)));
             this.uploadRate.Location = new System.Drawing.Point(43, 6);
             this.uploadRate.Margin = new System.Windows.Forms.Padding(0);
             this.uploadRate.Name = "uploadRate";
@@ -205,7 +203,7 @@
             // downloadRate
             // 
             this.downloadRate.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.downloadRate.Font = new System.Drawing.Font("Angsana New", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(138)));
+            this.downloadRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(138)));
             this.downloadRate.Location = new System.Drawing.Point(43, 19);
             this.downloadRate.Margin = new System.Windows.Forms.Padding(0);
             this.downloadRate.Name = "downloadRate";
@@ -251,16 +249,6 @@
             this.rateUnit2.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
             this.rateUnit2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
             this.rateUnit2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
-            // 
-            // showDetailFormTimer
-            // 
-            this.showDetailFormTimer.Interval = 700;
-            this.showDetailFormTimer.Tick += new System.EventHandler(this.showDetailFormTimer_Tick);
-            // 
-            // hideDetailFormTimer
-            // 
-            this.hideDetailFormTimer.Interval = 700;
-            this.hideDetailFormTimer.Tick += new System.EventHandler(this.hideDetailFormTimer_Tick);
             // 
             // notifyIcon
             // 
@@ -338,8 +326,6 @@
         private MainBallControl miniBallControl;
         private System.Windows.Forms.Label rateUnit1;
         private System.Windows.Forms.Label rateUnit2;
-        private System.Windows.Forms.Timer showDetailFormTimer;
-        private System.Windows.Forms.Timer hideDetailFormTimer;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ToolStripMenuItem showhide;
         private System.Windows.Forms.ToolStripMenuItem opacity95;

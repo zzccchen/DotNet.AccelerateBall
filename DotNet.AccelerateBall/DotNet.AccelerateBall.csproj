@@ -91,12 +91,6 @@
   <ItemGroup>
     <Compile Include="Settings.cs" />
     <Compile Include="Util\AppConfig.cs" />
-    <Compile Include="CustomControl\BigBallControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CustomControl\BigBallControl.Designer.cs">
-      <DependentUpon>BigBallControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="CustomControl\MiniBallControl.cs">
       <SubType>Component</SubType>
     </Compile>

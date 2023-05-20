@@ -2,7 +2,6 @@
 using NetWorkSpeedMonitor;
 using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -65,14 +64,6 @@ namespace DotNet.AccelerateBall
 
         #region 内存使用率监控和网速监控
 
-        /*开始监控内存*/
-
-        private void StartMonitorMemory()
-        {
-            monitorMemoryThread = new Thread(MenoryPercentage);
-            monitorMemoryThread.Start();
-        }
-
         /*开始监控网络*/
 
         private void StartMonitorNetwork()
@@ -93,7 +84,6 @@ namespace DotNet.AccelerateBall
             {
                 MessageBox.Show("无网卡");
             }
-            StartMonitorMemory();  //初始化内存使用率
         }
 
         /*网络监控*/
@@ -141,41 +131,6 @@ namespace DotNet.AccelerateBall
                 }
             }
             return speed;
-        }
-
-        /*内存监控*/
-
-        private void MenoryPercentage()
-        {
-            string oldRate = "";
-            while (true)
-            {
-                Thread.Sleep(500);
-                string usedMemoryRate = memoryInfo.getUsedMemoryRate();
-                if (!usedMemoryRate.Equals(oldRate))
-                {
-                    paintMiniBallControl(usedMemoryRate + "%");
-                }
-                oldRate = usedMemoryRate;
-            }
-        }
-
-        /*刷新内存使用率*/
-
-        private void paintMiniBallControl(string usedMemoryRate)
-        {
-            if (miniBallControl != null)
-            {
-                Graphics g = miniBallControl.CreateGraphics();
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-
-                Brush brush = new SolidBrush(Color.GreenYellow);
-                g.FillRectangle(brush, 10, 10, 20, 17);
-
-                brush = new SolidBrush(Color.Black);//填充的颜色
-                g.DrawString(usedMemoryRate, new Font("宋体", 8), brush, new PointF(9, 14));
-                g.Dispose();
-            }
         }
 
         #endregion 内存使用率监控和网速监控

@@ -141,7 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\clear.ico" />
-    <None Include="Resources\up_and_down.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

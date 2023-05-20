@@ -147,18 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\clear.ico" />
-    <None Include="Resources\dot.png" />
-    <None Include="Resources\network_pressed.png" />
-    <None Include="Resources\network_normal.png" />
-    <None Include="Resources\ball_pressed.png" />
-    <None Include="Resources\ball_normal.png" />
-    <None Include="Resources\network.png" />
-    <None Include="Resources\ball.png" />
-    <None Include="Resources\close_press.png" />
-    <None Include="Resources\close_normal.png" />
-    <None Include="Resources\press_clear_btn.png" />
-    <None Include="Resources\over_clear_btn.png" />
-    <None Include="Resources\normal_clear_btn.png" />
     <None Include="Resources\up_and_down.png" />
   </ItemGroup>
   <ItemGroup>

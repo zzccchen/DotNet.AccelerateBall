@@ -49,10 +49,10 @@ namespace DotNet.AccelerateBall
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.quit = new System.Windows.Forms.ToolStripMenuItem();
             this.CPU1 = new System.Windows.Forms.Label();
-            this.miniBallControl = new DotNet.AccelerateBall.MainBallControl();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.CPU2 = new System.Windows.Forms.Label();
             this.CpuUsage = new System.Windows.Forms.Label();
+            this.miniBallControl = new DotNet.AccelerateBall.MainBallControl();
             this.mainContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -189,7 +189,7 @@ namespace DotNet.AccelerateBall
             this.CPU1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.CPU1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
             this.CPU1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CPU1.ForeColor = System.Drawing.Color.White;
+            this.CPU1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
             this.CPU1.Location = new System.Drawing.Point(55, 6);
             this.CPU1.Margin = new System.Windows.Forms.Padding(0);
             this.CPU1.Name = "CPU1";
@@ -201,20 +201,6 @@ namespace DotNet.AccelerateBall
             this.CPU1.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
             this.CPU1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
             this.CPU1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
-            // 
-            // miniBallControl
-            // 
-            this.miniBallControl.BackColor = System.Drawing.Color.White;
-            this.miniBallControl.Location = new System.Drawing.Point(0, 0);
-            this.miniBallControl.Name = "miniBallControl";
-            this.miniBallControl.Size = new System.Drawing.Size(156, 80);
-            this.miniBallControl.TabIndex = 5;
-            this.miniBallControl.Text = "miniBallControl";
-            this.miniBallControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
-            this.miniBallControl.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
-            this.miniBallControl.MouseLeave += new System.EventHandler(this.miniBigFormSpace_MouseLeave);
-            this.miniBallControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
-            this.miniBallControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
             // 
             // notifyIcon
             // 
@@ -228,7 +214,7 @@ namespace DotNet.AccelerateBall
             this.CPU2.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.CPU2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
             this.CPU2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CPU2.ForeColor = System.Drawing.Color.White;
+            this.CPU2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
             this.CPU2.Location = new System.Drawing.Point(55, 27);
             this.CPU2.Margin = new System.Windows.Forms.Padding(0);
             this.CPU2.Name = "CPU2";
@@ -245,19 +231,33 @@ namespace DotNet.AccelerateBall
             // 
             this.CpuUsage.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.CpuUsage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(201)))), ((int)(((byte)(208)))));
-            this.CpuUsage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CpuUsage.ForeColor = System.Drawing.Color.White;
-            this.CpuUsage.Location = new System.Drawing.Point(14, 11);
+            this.CpuUsage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CpuUsage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
+            this.CpuUsage.Location = new System.Drawing.Point(5, 14);
             this.CpuUsage.Margin = new System.Windows.Forms.Padding(0);
             this.CpuUsage.Name = "CpuUsage";
-            this.CpuUsage.Size = new System.Drawing.Size(28, 32);
+            this.CpuUsage.Size = new System.Drawing.Size(42, 26);
             this.CpuUsage.TabIndex = 3;
-            this.CpuUsage.Text = "00";
+            this.CpuUsage.Text = "100";
             this.CpuUsage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.CpuUsage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
             this.CpuUsage.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
             this.CpuUsage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
             this.CpuUsage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
+            // 
+            // miniBallControl
+            // 
+            this.miniBallControl.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.miniBallControl.Location = new System.Drawing.Point(0, 0);
+            this.miniBallControl.Name = "miniBallControl";
+            this.miniBallControl.Size = new System.Drawing.Size(156, 80);
+            this.miniBallControl.TabIndex = 5;
+            this.miniBallControl.Text = "miniBallControl";
+            this.miniBallControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
+            this.miniBallControl.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
+            this.miniBallControl.MouseLeave += new System.EventHandler(this.miniBigFormSpace_MouseLeave);
+            this.miniBallControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
+            this.miniBallControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
             // 
             // MiniForm
             // 
@@ -277,7 +277,7 @@ namespace DotNet.AccelerateBall
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "悬浮球";
             this.TopMost = true;
-            this.TransparencyKey = System.Drawing.Color.White;
+            this.TransparencyKey = System.Drawing.Color.WhiteSmoke;
             this.mainContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 

@@ -108,7 +108,6 @@
     <Compile Include="NetworkSpeed\NetworkMonitor.cs" />
     <Compile Include="NetworkSpeed\NetworkAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\StartupSetting.cs" />
     <EmbeddedResource Include="CustomControl\MiniBallControl.resx">
       <DependentUpon>MiniBallControl.cs</DependentUpon>
     </EmbeddedResource>

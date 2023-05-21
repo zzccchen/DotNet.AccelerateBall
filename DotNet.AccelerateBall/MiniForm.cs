@@ -1,5 +1,4 @@
-﻿using DotNet.AccelerateBall.Util;
-using NetWorkSpeedMonitor;
+﻿using NetWorkSpeedMonitor;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -57,7 +56,6 @@ namespace DotNet.AccelerateBall
         {
             Control.CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
-            StartupSetting.autoRun("DotNet.AccelerateBall.exe", Application.ExecutablePath);
             initParameter();
             StartMonitor(); //初始化网络流量监控
         }
@@ -189,17 +187,53 @@ namespace DotNet.AccelerateBall
                         {
                             this.CPU1.Text = src[1].Substring(0, 3);
                             cpu_flag++;
+                            int CPU1_int = int.Parse(this.CPU1.Text);
+                            if (CPU1_int >= 85)
+                            {
+                                this.CPU1.ForeColor = System.Drawing.Color.FromArgb(235, 158, 206);
+                            }
+                            else if (CPU1_int >= 60)
+                            {
+                                this.CPU1.ForeColor = System.Drawing.Color.FromArgb(253, 213, 59);
+                            }
+                            else
+                            {
+                                this.CPU1.ForeColor = System.Drawing.Color.FromArgb(254, 254, 254);
+                            }
                             continue;
                         }
                         if (cpu_flag == 2 && temp[0].StartsWith("Temp"))
                         {
                             this.CPU2.Text = src[1].Substring(0, 3);
+                            int CPU2_int = int.Parse(this.CPU2.Text);
+                            if (CPU2_int >= 85)
+                            {
+                                this.CPU2.ForeColor = System.Drawing.Color.FromArgb(235, 158, 206);
+                            }
+                            else if (CPU2_int >= 60)
+                            {
+                                this.CPU2.ForeColor = System.Drawing.Color.FromArgb(253, 213, 59);
+                            }
+                            else
+                            {
+                                this.CPU2.ForeColor = System.Drawing.Color.FromArgb(254, 254, 254);
+                            }
                             continue;
                         }
                         if (temp[0].StartsWith("CPU Usage"))
                         {
-                            this.CpuUsage.Text = src[1].Substring(0, 3);
-                            continue;
+                            string[] usage_list = src[1].Split('.');
+                            this.CpuUsage.Text = usage_list[0];
+                            this.CpuUsage.Location = new System.Drawing.Point(5, 14);
+                            //int usage_int = int.Parse(usage_list[0]);
+                            //if (usage_int >= 90)
+                            //{
+                            //    this.CpuUsage.ForeColor = System.Drawing.Color.FromArgb(212, 59, 26);
+                            //}
+                            //else
+                            //{
+                            //    this.CpuUsage.ForeColor = System.Drawing.Color.FromArgb(254, 254, 254);
+                            //}
                         }
                         //lstViewSensor.Items.Add(new ListViewItem(temp));
                         bgWorker.ReportProgress(1, temp);

@@ -147,7 +147,7 @@ namespace DotNet.AccelerateBall
             timer.Elapsed += background_FetchStates_DoWork;
 
             // 设置定时器为可重复触发
-            timer.AutoReset = true;
+            timer.AutoReset = false;
 
             // 启动定时器
             timer.Start();
@@ -156,10 +156,6 @@ namespace DotNet.AccelerateBall
         private void background_FetchStates_DoWork(object sender, ElapsedEventArgs e)
         {
             BackgroundWorker bgWorker = new BackgroundWorker();
-            bgWorker.WorkerReportsProgress = true;
-
-            bgWorker.ReportProgress(0, "start");
-            cpu1test += 1;
             string ip = txtIp;
             string user = txtUser;
             string password = txtPassword;
@@ -168,44 +164,50 @@ namespace DotNet.AccelerateBall
             string parametersSensor = string.Format(formatSensor, ip, user, password);
 
             string fullExecuteSensor = ipmitoolPath + " " + parametersSensor;
-            string result = execute(fullExecuteSensor);
 
-            result = result.Replace("\r\n", "\n");
-            string[] sensorList = result.Split('\n', '\r');
-
-            //this.CPU1.Text = "." + cpu1test;
-            int cpu_flag = 1;
-            foreach (var item in sensorList)
+            bgWorker.WorkerReportsProgress = true;
+            while (true)
             {
-                if (item.Contains("Temp") || item.Contains("CPU Usage"))
-                {
-                    string[] temp = new string[8];
-                    var src = item.Split('|');
-                    temp[0] = src[0];
-                    temp[1] = src[1];
-                    if (cpu_flag == 1 && temp[0].StartsWith("Temp"))
-                    {
-                        this.CPU1.Text = src[1].Substring(0, 3);
-                        cpu_flag++;
-                        continue;
-                    }
-                    if (cpu_flag == 2 && temp[0].StartsWith("Temp"))
-                    {
-                        this.CPU2.Text = src[1].Substring(0, 3);
-                        continue;
-                    }
-                    if (temp[0].StartsWith("CPU Usage"))
-                    {
-                        this.CpuUsage.Text = src[1].Substring(0, 3);
-                        continue;
-                    }
-                    //lstViewSensor.Items.Add(new ListViewItem(temp));
-                    bgWorker.ReportProgress(1, temp);
-                }
-            }
-            bgWorker.ReportProgress(100, "completed");
-            // 停止后台任务
+                bgWorker.ReportProgress(0, "start");
 
+                string result = execute(fullExecuteSensor);
+
+                result = result.Replace("\r\n", "\n");
+                string[] sensorList = result.Split('\n', '\r');
+
+                //this.CPU1.Text = "." + cpu1test;
+                int cpu_flag = 1;
+                foreach (var item in sensorList)
+                {
+                    if (item.Contains("Temp") || item.Contains("CPU Usage"))
+                    {
+                        string[] temp = new string[8];
+                        var src = item.Split('|');
+                        temp[0] = src[0];
+                        temp[1] = src[1];
+                        if (cpu_flag == 1 && temp[0].StartsWith("Temp"))
+                        {
+                            this.CPU1.Text = src[1].Substring(0, 3);
+                            cpu_flag++;
+                            continue;
+                        }
+                        if (cpu_flag == 2 && temp[0].StartsWith("Temp"))
+                        {
+                            this.CPU2.Text = src[1].Substring(0, 3);
+                            continue;
+                        }
+                        if (temp[0].StartsWith("CPU Usage"))
+                        {
+                            this.CpuUsage.Text = src[1].Substring(0, 3);
+                            continue;
+                        }
+                        //lstViewSensor.Items.Add(new ListViewItem(temp));
+                        bgWorker.ReportProgress(1, temp);
+                    }
+                }
+                bgWorker.ReportProgress(100, "completed");
+                // 停止后台任务
+            }
             // 释放资源
             bgWorker.Dispose();
         }

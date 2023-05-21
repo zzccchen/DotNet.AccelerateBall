@@ -15,7 +15,7 @@ namespace DotNet.AccelerateBall
         {
             base.OnPaint(pe);
             Graphics g = pe.Graphics;
-            g.SmoothingMode = SmoothingMode.None;
+            g.SmoothingMode = SmoothingMode.HighQuality;
 
             Brush brush = new SolidBrush(Color.FromArgb(38, 38, 38));
             Rectangle rect = new Rectangle(2, 2, 100, 50);

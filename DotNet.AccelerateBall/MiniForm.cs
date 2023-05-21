@@ -224,7 +224,6 @@ namespace DotNet.AccelerateBall
                         {
                             string[] usage_list = src[1].Split('.');
                             this.CpuUsage.Text = usage_list[0];
-                            this.CpuUsage.Location = new System.Drawing.Point(5, 14);
                             //int usage_int = int.Parse(usage_list[0]);
                             //if (usage_int >= 90)
                             //{

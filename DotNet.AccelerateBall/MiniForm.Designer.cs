@@ -1,4 +1,7 @@
-﻿namespace DotNet.AccelerateBall
+﻿using System.Reflection.Emit;
+using System.Windows.Forms;
+
+namespace DotNet.AccelerateBall
 {
     partial class MiniForm
     {
@@ -45,14 +48,10 @@
             this.opacity25 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.quit = new System.Windows.Forms.ToolStripMenuItem();
-            this.uploadRate = new System.Windows.Forms.Label();
-            this.downloadRate = new System.Windows.Forms.Label();
-            this.rateUnit1 = new System.Windows.Forms.Label();
-            this.rateUnit2 = new System.Windows.Forms.Label();
-            this.showDetailFormTimer = new System.Windows.Forms.Timer(this.components);
-            this.hideDetailFormTimer = new System.Windows.Forms.Timer(this.components);
+            this.CPU1 = new System.Windows.Forms.Label();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.up_down_image = new System.Windows.Forms.Label();
+            this.CPU2 = new System.Windows.Forms.Label();
+            this.CpuUsage = new System.Windows.Forms.Label();
             this.miniBallControl = new DotNet.AccelerateBall.MainBallControl();
             this.mainContextMenu.SuspendLayout();
             this.SuspendLayout();
@@ -185,82 +184,23 @@
             this.quit.Text = "退出";
             this.quit.Click += new System.EventHandler(this.quit_Click);
             // 
-            // uploadRate
+            // CPU1
             // 
-            this.uploadRate.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.uploadRate.BackColor = System.Drawing.SystemColors.Control;
-            this.uploadRate.Font = new System.Drawing.Font("Angsana New", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(138)));
-            this.uploadRate.Location = new System.Drawing.Point(43, 6);
-            this.uploadRate.Margin = new System.Windows.Forms.Padding(0);
-            this.uploadRate.Name = "uploadRate";
-            this.uploadRate.Size = new System.Drawing.Size(30, 10);
-            this.uploadRate.TabIndex = 3;
-            this.uploadRate.Text = "0";
-            this.uploadRate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.uploadRate.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
-            this.uploadRate.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
-            this.uploadRate.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
-            this.uploadRate.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
-            // 
-            // downloadRate
-            // 
-            this.downloadRate.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.downloadRate.Font = new System.Drawing.Font("Angsana New", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(138)));
-            this.downloadRate.Location = new System.Drawing.Point(43, 19);
-            this.downloadRate.Margin = new System.Windows.Forms.Padding(0);
-            this.downloadRate.Name = "downloadRate";
-            this.downloadRate.Size = new System.Drawing.Size(30, 10);
-            this.downloadRate.TabIndex = 4;
-            this.downloadRate.Text = "0";
-            this.downloadRate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.downloadRate.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
-            this.downloadRate.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
-            this.downloadRate.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
-            this.downloadRate.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
-            // 
-            // rateUnit1
-            // 
-            this.rateUnit1.AutoSize = true;
-            this.rateUnit1.BackColor = System.Drawing.SystemColors.Control;
-            this.rateUnit1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rateUnit1.Location = new System.Drawing.Point(69, 6);
-            this.rateUnit1.Margin = new System.Windows.Forms.Padding(0);
-            this.rateUnit1.Name = "rateUnit1";
-            this.rateUnit1.Size = new System.Drawing.Size(20, 12);
-            this.rateUnit1.TabIndex = 7;
-            this.rateUnit1.Text = "K/S";
-            this.rateUnit1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.rateUnit1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
-            this.rateUnit1.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
-            this.rateUnit1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
-            this.rateUnit1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
-            // 
-            // rateUnit2
-            // 
-            this.rateUnit2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.rateUnit2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rateUnit2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rateUnit2.Location = new System.Drawing.Point(69, 19);
-            this.rateUnit2.Margin = new System.Windows.Forms.Padding(0);
-            this.rateUnit2.Name = "rateUnit2";
-            this.rateUnit2.Size = new System.Drawing.Size(20, 12);
-            this.rateUnit2.TabIndex = 8;
-            this.rateUnit2.Text = "K/S";
-            this.rateUnit2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.rateUnit2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
-            this.rateUnit2.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
-            this.rateUnit2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
-            this.rateUnit2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
-            // 
-            // showDetailFormTimer
-            // 
-            this.showDetailFormTimer.Interval = 700;
-            this.showDetailFormTimer.Tick += new System.EventHandler(this.showDetailFormTimer_Tick);
-            // 
-            // hideDetailFormTimer
-            // 
-            this.hideDetailFormTimer.Interval = 700;
-            this.hideDetailFormTimer.Tick += new System.EventHandler(this.hideDetailFormTimer_Tick);
+            this.CPU1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.CPU1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.CPU1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CPU1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
+            this.CPU1.Location = new System.Drawing.Point(55, 6);
+            this.CPU1.Margin = new System.Windows.Forms.Padding(0);
+            this.CPU1.Name = "CPU1";
+            this.CPU1.Size = new System.Drawing.Size(28, 20);
+            this.CPU1.TabIndex = 3;
+            this.CPU1.Text = "00";
+            this.CPU1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.CPU1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
+            this.CPU1.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
+            this.CPU1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
+            this.CPU1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
             // 
             // notifyIcon
             // 
@@ -269,28 +209,48 @@
             this.notifyIcon.Text = "电脑悬浮球";
             this.notifyIcon.Visible = true;
             // 
-            // up_down_image
+            // CPU2
             // 
-            this.up_down_image.BackColor = System.Drawing.SystemColors.Control;
-            this.up_down_image.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.up_down_image.Image = global::DotNet.AccelerateBall.Properties.Resources.up_and_down;
-            this.up_down_image.Location = new System.Drawing.Point(40, 4);
-            this.up_down_image.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.up_down_image.Name = "up_down_image";
-            this.up_down_image.Size = new System.Drawing.Size(7, 30);
-            this.up_down_image.TabIndex = 2;
-            this.up_down_image.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.up_down_image.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
-            this.up_down_image.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
-            this.up_down_image.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
-            this.up_down_image.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
+            this.CPU2.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.CPU2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.CPU2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CPU2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
+            this.CPU2.Location = new System.Drawing.Point(55, 27);
+            this.CPU2.Margin = new System.Windows.Forms.Padding(0);
+            this.CPU2.Name = "CPU2";
+            this.CPU2.Size = new System.Drawing.Size(28, 20);
+            this.CPU2.TabIndex = 3;
+            this.CPU2.Text = "00";
+            this.CPU2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.CPU2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
+            this.CPU2.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
+            this.CPU2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
+            this.CPU2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
+            // 
+            // CpuUsage
+            // 
+            this.CpuUsage.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.CpuUsage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(201)))), ((int)(((byte)(208)))));
+            this.CpuUsage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CpuUsage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(254)))), ((int)(((byte)(254)))));
+            this.CpuUsage.Location = new System.Drawing.Point(5, 14);
+            this.CpuUsage.Margin = new System.Windows.Forms.Padding(0);
+            this.CpuUsage.Name = "CpuUsage";
+            this.CpuUsage.Size = new System.Drawing.Size(42, 26);
+            this.CpuUsage.TabIndex = 3;
+            this.CpuUsage.Text = "100";
+            this.CpuUsage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.CpuUsage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
+            this.CpuUsage.MouseEnter += new System.EventHandler(this.miniBigFormSpace_MouseEnter);
+            this.CpuUsage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseMove);
+            this.CpuUsage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseUp);
             // 
             // miniBallControl
             // 
-            this.miniBallControl.BackColor = System.Drawing.Color.White;
+            this.miniBallControl.BackColor = System.Drawing.Color.WhiteSmoke;
             this.miniBallControl.Location = new System.Drawing.Point(0, 0);
             this.miniBallControl.Name = "miniBallControl";
-            this.miniBallControl.Size = new System.Drawing.Size(96, 40);
+            this.miniBallControl.Size = new System.Drawing.Size(156, 80);
             this.miniBallControl.TabIndex = 5;
             this.miniBallControl.Text = "miniBallControl";
             this.miniBallControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.miniBigFormSpace_MouseDown);
@@ -304,13 +264,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(96, 40);
+            this.ClientSize = new System.Drawing.Size(156, 80);
             this.ContextMenuStrip = this.mainContextMenu;
-            this.Controls.Add(this.rateUnit2);
-            this.Controls.Add(this.up_down_image);
-            this.Controls.Add(this.rateUnit1);
-            this.Controls.Add(this.uploadRate);
-            this.Controls.Add(this.downloadRate);
+            this.Controls.Add(this.CpuUsage);
+            this.Controls.Add(this.CPU2);
+            this.Controls.Add(this.CPU1);
             this.Controls.Add(this.miniBallControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -319,10 +277,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "悬浮球";
             this.TopMost = true;
-            this.TransparencyKey = System.Drawing.Color.White;
+            this.TransparencyKey = System.Drawing.Color.WhiteSmoke;
             this.mainContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -332,14 +289,8 @@
         private System.Windows.Forms.ToolStripMenuItem transparecy;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem quit;
-        private System.Windows.Forms.Label up_down_image;
-        private System.Windows.Forms.Label uploadRate;
-        private System.Windows.Forms.Label downloadRate;
+        private System.Windows.Forms.Label CPU1;
         private MainBallControl miniBallControl;
-        private System.Windows.Forms.Label rateUnit1;
-        private System.Windows.Forms.Label rateUnit2;
-        private System.Windows.Forms.Timer showDetailFormTimer;
-        private System.Windows.Forms.Timer hideDetailFormTimer;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ToolStripMenuItem showhide;
         private System.Windows.Forms.ToolStripMenuItem opacity95;
@@ -352,6 +303,8 @@
         private System.Windows.Forms.ToolStripMenuItem showStyle;
         private System.Windows.Forms.ToolStripMenuItem showStyle1;
         private System.Windows.Forms.ToolStripMenuItem showStyle2;
+        private System.Windows.Forms.Label CPU2;
+        private System.Windows.Forms.Label CpuUsage;
     }
 }
 

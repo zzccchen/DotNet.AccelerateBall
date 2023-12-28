@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace DotNet.AccelerateBall
 {
@@ -13,32 +13,32 @@ namespace DotNet.AccelerateBall
 
         protected override void OnPaint(PaintEventArgs pe)
         {
-            base.OnPaint(pe);         
+            base.OnPaint(pe);
             Graphics g = pe.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.SmoothingMode = SmoothingMode.HighQuality;
 
-            Brush brush = new SolidBrush(Color.FromArgb(78, 78, 78));
-            Rectangle rect = new Rectangle(0, 0, 95, 38);
-            GraphicsPath path = CreateRoundedRectanglePath(rect, 19);
-            g.FillPath(brush, path); 
+            Brush brush = new SolidBrush(Color.FromArgb(38, 38, 38));
+            Rectangle rect = new Rectangle(2, 2, 100, 50);
+            GraphicsPath path = CreateRoundedRectanglePath(rect, 25);
+            g.FillPath(brush, path);
 
-            brush = new SolidBrush(Color.WhiteSmoke);
-            rect = new Rectangle(0, 0, 95, 38);
-            path = CreateRoundedRectanglePath(rect, 19);
-            g.FillPath(brush, path);            
+            //brush = new SolidBrush(Color.FromArgb(38, 38, 38));
+            //rect = new Rectangle(0, 0, 95, 38);
+            //path = CreateRoundedRectanglePath(rect, 19);
+            //g.FillPath(brush, path);
 
-            brush = new SolidBrush(Color.FromArgb(51, 154, 56));
-            g.FillEllipse(brush, 2, 2, 34, 34);
+            //brush = new SolidBrush(Color.FromArgb(42, 151, 157));//填充的颜色
+            //g.FillEllipse(brush, 2, 2, 52, 52);
 
-            brush = new SolidBrush(Color.GreenYellow);//填充的颜色         
-            g.FillEllipse(brush, 4, 4, 30, 30);
+            brush = new SolidBrush(Color.FromArgb(56, 201, 208));
+            g.FillEllipse(brush, 0, 0, 54, 54);
 
             g.Dispose();
         }
 
         public static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int cornerRadius)
         {
-            int diameter = cornerRadius*2;
+            int diameter = cornerRadius * 2;
             Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
             GraphicsPath path = new GraphicsPath();
 
